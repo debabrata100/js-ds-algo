@@ -1,0 +1,23 @@
+{
+  "name": "js-ds-algo",
+  "version": "1.0.0",
+  "description": "This projects contains implementation of common data structures and algorithms using Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debabrata100/js-ds-algo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debabrata100/js-ds-algo/issues"
+  },
+  "homepage": "https://github.com/debabrata100/js-ds-algo#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

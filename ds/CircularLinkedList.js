@@ -116,7 +116,83 @@ class CircularLinkedList {
     }
     return result;
   }
+  deleteAllOddNodes() {
+    let previous = this.head;
+    let iterationCount = 0;
+    const length = this.length;
+    let next = previous.next;
+    while (true) {
+      if (next.value % 2 !== 0) {
+        previous.next = next.next;
+        this.length--;
+      }
+      previous = previous.next;
+      next = previous.next;
+      iterationCount++;
+      if (iterationCount >= length) {
+        break;
+      }
+    }
+    if (this.length < 1) {
+      this.head = null;
+      this.length = 0;
+    }
+  }
 }
 function Node(value) {
   this.value = value;
 }
+
+/**
+ *
+ * @param {LinkedList} L1
+ * @param {LinkedList} L2
+ * @returns bool
+ * This function takes 2 linked list as input to compare they are identical or not
+ */
+function checkIdentical(L1, L2) {
+  if (L1.length !== L2.length) return false;
+  let commonNode = L1.head;
+  // search for common node in L2
+  let startNode = L2.head;
+  for (let i = 0; i < L2.length; i++) {
+    if (commonNode.value === startNode.value) {
+      break;
+    }
+    startNode = startNode.next;
+  }
+  for (i = 0; i < L1.length; i++) {
+    startNode = startNode.next;
+    commonNode = commonNode.next;
+    if (startNode.value !== commonNode.value) {
+      return false;
+    }
+  }
+  return true;
+}
+const L1 = new CircularLinkedList();
+// L1.insert(17, 0);
+// L1.insert(15, 0);
+// L1.insert(14, 0);
+// L1.insert(13, 0);
+// L1.insert(12, 0);
+// L1.insert(11, 0);
+// L1.insert(10, 0);
+// console.log(L1.toArray());
+// L1.deleteAllOddNodes();
+// console.log(L1.toArray());
+
+// const L2 = new CircularLinkedList();
+// L2.append(30);
+// L2.append(40);
+// L2.append(50);
+// L2.append(10);
+// L2.append(20);
+// const L3 = new CircularLinkedList();
+// L3.append(30);
+// L3.append(40);
+// L3.append(50);
+// L3.append(10);
+// L3.append(20);
+
+// console.log(checkIdentical(L2, L3));

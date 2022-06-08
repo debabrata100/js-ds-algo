@@ -1,55 +1,100 @@
 class CircularLinkedList {
   constructor() {
     this.head = null;
-    this.tail = null;
     this.length = 0;
   }
-  push(value) {
+  append(value) {
     const node = new Node(value);
-    if (this.tail) {
-      this.tail.next = node;
-      this.tail = this.tail.next;
-    } else {
+    if (!this.head) {
       this.head = node;
-      this.tail = node;
+      node.next = this.head;
+    } else {
+      let start = this.head;
+      let end = start;
+      while (end.next !== this.head) {
+        end = end.next;
+      }
+      end.next = node;
+      node.next = this.head;
     }
-    this.tail.next = this.head;
     this.length++;
   }
-  shift() {
-    if (!this.head) return;
-    const value = this.head.value;
-    if (this.head === this.tail) {
-      this.head = null;
-      this.tail = null;
-      this.length--;
-      return value;
+  getElementAt(index) {
+    if (index >= 0 && index <= this.length) {
+      let targetNode = this.head;
+      for (let i = 0; i < index; i++) {
+        targetNode = targetNode.next;
+      }
+      return targetNode;
     }
-    let tailNode = this.head.next;
-    while (tailNode.next !== this.head) {
-      tailNode = tailNode.next;
-    }
-    this.head = this.head.next;
-    tailNode.next = this.head;
-    this.length--;
-    return value;
+    return undefined;
   }
-  pop() {
-    if (!this.tail) return null;
-    const returnValue = this.tail.value;
-    let nodeBeforeTail = this.head;
-    while (nodeBeforeTail.next !== this.tail) {
-      nodeBeforeTail = nodeBeforeTail.next;
+  // Insert at given position
+  insert(value, index) {
+    const node = new Node(value);
+    if (index >= 0 && index <= this.length) {
+      let previous;
+      if (index === 0) {
+        if (!this.head) {
+          this.head = node;
+          node.next = this.head;
+        } else {
+          previous = this.getElementAt(this.length - 1);
+          previous.next = node;
+          node.next = this.head;
+          this.head = node;
+        }
+      } else {
+        previous = this.getElementAt(index - 1);
+        node.next = previous.next;
+        previous.next = node;
+      }
+      this.length++;
+      return true;
     }
-    this.tail.next = null;
-    nodeBeforeTail.next = this.head;
-    this.tail = nodeBeforeTail;
-    return returnValue;
+  }
+  removeAt(index) {
+    if (index >= 0 && index < this.length && this.head) {
+      let removedValue;
+      if (this.length === 1) {
+        removedValue = this.head.value;
+        this.head = null;
+      } else {
+        let previous;
+        if (index === 0) {
+          previous = this.getElementAt(this.length - 1);
+        } else {
+          previous = this.getElementAt(index - 1);
+        }
+        removedValue = previous.next.value;
+        previous.next = previous.next.next;
+        if (this.head.value === removedValue) {
+          this.head = previous.next;
+        }
+      }
+      this.length--;
+      return removedValue;
+    }
+    return false;
+  }
+  indexOf(element) {
+    let currentNode = this.head;
+    for (let i = 0; i < this.length; i++) {
+      if (currentNode.value === element) {
+        return i;
+      }
+      currentNode = currentNode.next;
+    }
+    return -1;
+  }
+  isPresent(element) {
+    return this.indexOf(element) !== -1;
+  }
+  remove(element) {
+    return this.removeAt(this.indexOf(element));
   }
   reverse() {
-    let node = this.head;
-    this.head = this.tail;
-    this.tail = node;
+    let node = this.head.next;
     let next;
     let previous = this.head;
     while (node !== this.head) {
@@ -60,7 +105,7 @@ class CircularLinkedList {
     }
     node.next = previous;
   }
-  collect() {
+  toArray() {
     const result = [];
     if (!this.head) return result;
     let currentNode = this.head.next;
@@ -75,18 +120,3 @@ class CircularLinkedList {
 function Node(value) {
   this.value = value;
 }
-
-// const CLL = new CircularLinkedList();
-// CLL.push(10);
-// CLL.push(20);
-// CLL.push(30);
-// CLL.push(40);
-// CLL.push(50);
-// console.log(CLL.collect());
-// CLL.reverse();
-// console.log(CLL.collect());
-// console.log(CLL.pop());
-// console.log(CLL.shift());
-// console.log(CLL.shift());
-// console.log(CLL.shift());
-// console.log(CLL);

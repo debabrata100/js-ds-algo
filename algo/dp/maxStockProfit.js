@@ -23,6 +23,6 @@ function maxStockProfit(stockArr) {
   return { maxProfit, bestBuyPrice, bestSellPrice };
 }
 
-// console.log(maxStockProfit([32, 46, 26, 38, 40, 48, 42]));
-// console.log(maxStockProfit([55, 29, 22, 21, 20, 19]));
-// console.log(maxStockProfit([150, 120, 130, 160, 125, 170]));
+// console.log(maxStockProfit([32, 46, 26, 38, 40, 48, 42])); // { maxProfit: 22, bestBuyPrice: 26, bestSellPrice: 48 }
+// console.log(maxStockProfit([55, 29, 22, 21, 20, 19])); // { maxProfit: 0, bestBuyPrice: 55, bestSellPrice: 55 }
+// console.log(maxStockProfit([150, 120, 130, 160, 125, 170])); // { maxProfit: 50, bestBuyPrice: 120, bestSellPrice: 170 }

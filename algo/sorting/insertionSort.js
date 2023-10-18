@@ -2,7 +2,8 @@
  *
  * @param {Array} arr : number array
  * @returns sorted array
- * Time Complexity: O(n^2) (Best Case, Worst Case, Average Case)
+ * Time Complexity: O(n^2) (Worst Case, Average Case)
+ * O(n) (Best Case)
  * Space Complexity: O(1)
  */
 function insertionSort(arr) {
